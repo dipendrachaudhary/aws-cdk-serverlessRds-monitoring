@@ -1,0 +1,198 @@
+{
+  "Resources": {
+    "TopicBFC7AF6E": {
+      "Type": "AWS::SNS::Topic",
+      "Properties": {
+        "DisplayName": "rds-test",
+        "TopicName": "rds-test"
+      },
+      "Metadata": {
+        "aws:cdk:path": "RdsStack/Topic/Resource"
+      }
+    },
+    "Subscription391C9821": {
+      "Type": "AWS::SNS::Subscription",
+      "Properties": {
+        "Protocol": "email",
+        "TopicArn": {
+          "Ref": "TopicBFC7AF6E"
+        },
+        "Endpoint": "dipendrac3@gmail.com"
+      },
+      "Metadata": {
+        "aws:cdk:path": "RdsStack/Subscription/Resource"
+      }
+    },
+    "VolumeReadIOPSAlarm8BCC9BAB": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "EvaluationPeriods": 3,
+        "AlarmActions": [
+          {
+            "Ref": "TopicBFC7AF6E"
+          }
+        ],
+        "DatapointsToAlarm": 2,
+        "Dimensions": [
+          {
+            "Name": "dbClusterIdentifier",
+            "Value": "database-1"
+          }
+        ],
+        "MetricName": "VolumeReadIOPS",
+        "Namespace": "AWS/RDS",
+        "Period": 300,
+        "Statistic": "Average",
+        "Threshold": 100
+      },
+      "Metadata": {
+        "aws:cdk:path": "RdsStack/VolumeReadIOPSAlarm/Resource"
+      }
+    },
+    "VolumeWriteIOPSAlarmF3A3045F": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "EvaluationPeriods": 3,
+        "AlarmActions": [
+          {
+            "Ref": "TopicBFC7AF6E"
+          }
+        ],
+        "DatapointsToAlarm": 2,
+        "Dimensions": [
+          {
+            "Name": "dbClusterIdentifier",
+            "Value": "database-1"
+          }
+        ],
+        "MetricName": "VolumeWriteIOPS",
+        "Namespace": "AWS/RDS",
+        "Period": 300,
+        "Statistic": "Average",
+        "Threshold": 100
+      },
+      "Metadata": {
+        "aws:cdk:path": "RdsStack/VolumeWriteIOPSAlarm/Resource"
+      }
+    },
+    "ReadIOPSAlarmD1D52864": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "EvaluationPeriods": 3,
+        "AlarmActions": [
+          {
+            "Ref": "TopicBFC7AF6E"
+          }
+        ],
+        "DatapointsToAlarm": 2,
+        "Dimensions": [
+          {
+            "Name": "DBInstanceIdentifier",
+            "Value": "a"
+          }
+        ],
+        "MetricName": "ReadIOPS",
+        "Namespace": "AWS/RDS",
+        "Period": 300,
+        "Statistic": "Average",
+        "Threshold": 100
+      },
+      "Metadata": {
+        "aws:cdk:path": "RdsStack/ReadIOPSAlarm/Resource"
+      }
+    },
+    "WriteIOPSAlarmADBE1E65": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "EvaluationPeriods": 3,
+        "AlarmActions": [
+          {
+            "Ref": "TopicBFC7AF6E"
+          }
+        ],
+        "DatapointsToAlarm": 2,
+        "Dimensions": [
+          {
+            "Name": "DBInstanceIdentifier",
+            "Value": "d"
+          }
+        ],
+        "MetricName": "WriteIOPS",
+        "Namespace": "AWS/RDS",
+        "Period": 300,
+        "Statistic": "Average",
+        "Threshold": 100
+      },
+      "Metadata": {
+        "aws:cdk:path": "RdsStack/WriteIOPSAlarm/Resource"
+      }
+    },
+    "ReaderDiskQueueDepthAlarmBFAF08BE": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "EvaluationPeriods": 3,
+        "AlarmActions": [
+          {
+            "Ref": "TopicBFC7AF6E"
+          }
+        ],
+        "DatapointsToAlarm": 2,
+        "Dimensions": [
+          {
+            "Name": "DBInstanceIdentifier",
+            "Value": "a"
+          }
+        ],
+        "MetricName": "DiskQueueDepth",
+        "Namespace": "AWS/RDS",
+        "Period": 300,
+        "Statistic": "Average",
+        "Threshold": 100
+      },
+      "Metadata": {
+        "aws:cdk:path": "RdsStack/ReaderDiskQueueDepthAlarm/Resource"
+      }
+    },
+    "WriterDiskQueueDepthAlarm46D8EB45": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "EvaluationPeriods": 3,
+        "AlarmActions": [
+          {
+            "Ref": "TopicBFC7AF6E"
+          }
+        ],
+        "DatapointsToAlarm": 2,
+        "Dimensions": [
+          {
+            "Name": "DBInstanceIdentifier",
+            "Value": "d"
+          }
+        ],
+        "MetricName": "DiskQueueDepth",
+        "Namespace": "AWS/RDS",
+        "Period": 300,
+        "Statistic": "Average",
+        "Threshold": 100
+      },
+      "Metadata": {
+        "aws:cdk:path": "RdsStack/WriterDiskQueueDepthAlarm/Resource"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/02LzQ7CIBCEn6V3ui1GPWv6Bm1fABeM9IdtWLAHwrsbbEw8zcw3MxLkpYW2uqmda9Rzk5C8gTQEhbPoDVP0aERHjoOPGET3dD+aRTkldgxppM1iKQ8zxAejt1uw5Ar9z1ngQlHvKuAL0n1Rfi2Tr8k5C0fawMTNW15BnuFUTWxt7aMLdjXQH/oBZu73lLgAAAA="
+      },
+      "Metadata": {
+        "aws:cdk:path": "RdsStack/CDKMetadata/Default"
+      }
+    }
+  }
+}
